@@ -4,7 +4,7 @@ var app = express();
 var request = require('request');
 var jwt = require('jsonwebtoken');
 
-app.use(bodyParser.json());
+app.use(bodyParser.json());node
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
@@ -19,7 +19,7 @@ app.post('/login', bodyParser.json(), function (req, res) {
 	if (!users[req.body.username] || users[req.body.username] !== req.body.password) {
 		res.status(401).json({ error: 'Usuário ou senha inválido.' })
 	} else {
-		var token = jwt.sign({ username: req.body.username, permissao: 'admin' }, JWT_PASSWORD, { expiresIn: 3200 }); //tempo de validade pode ser colocado em '1h', '1d', ou 120 para 2 minutos, por exemplo
+		var token = jwt.sign({ username: req.body.username, permissao: 'admin' }, JWT_PASSWORD, { expiresIn: 1200 }); //tempo de validade pode ser colocado em '1h', '1d', ou 120 para 2 minutos, por exemplo
 
 		res.status(200);
 		res.json({token:token});
@@ -106,13 +106,11 @@ function getDados(url, res) {
 		console.log('error:', error); // Print the error if one occurred
 		console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
 		console.log('body:', ""+body+''); // Print the HTML for the Google homepage.
-		if (body == null || body =="null"){
-		console.log("vazio")
+		if (body == null || body =="null"){ 
 			res.statusCode = 404; 
 			var erro = { error: 'Not Found' }
 			res.json(erro);
-		} else {
-		console.log("vazio1")
+		} else { 
 			res.statusCode = 200;
 			res.send(body);
 		}
