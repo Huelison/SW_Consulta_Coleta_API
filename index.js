@@ -26,8 +26,8 @@ app.post('/login', bodyParser.json(), function (req, res) {
 	}
 });
 
-app.get('/session', autenticacao, secao);
-function secao(req, res) {
+app.get('/session', autenticacao, sessao);
+function sessao(req, res) {
 	console.log('hello');
 	console.log("Autorizado.");
 	res.data = {};
@@ -37,7 +37,7 @@ function secao(req, res) {
 }
 
 function autenticacao(req, res, next) {
-	console.log("/session ", req.headers);
+	console.log("/autenticacao", req.headers);
 	var auth = req.headers.authorization;
 
 	if (!auth || !auth.startsWith('Bearer')) {
